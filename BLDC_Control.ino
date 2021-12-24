@@ -31,7 +31,7 @@ void setup(){
 }
 
 void setDriveRegister(int matrix[][6], int seq, int pwm){
-  //-- PWM_C, GND_C ,PWM_B, GND_B, PWM_A, GND_A
+  // PWM_C, GND_C ,PWM_B, GND_B, PWM_A, GND_A
   analogWrite(PWM_C, matrix[seq][0] * 255);
   analogWrite(GND_C, matrix[seq][1] * pwm);
   analogWrite(PWM_B, matrix[seq][2] * 255);
@@ -41,15 +41,17 @@ void setDriveRegister(int matrix[][6], int seq, int pwm){
 }
 
 void loop(){
-  //-- PWM_C, GND_C ,PWM_B, GND_B, PWM_A, GND_A
+  // PWM_C, GND_C ,PWM_B, GND_B, PWM_A, GND_A
   int i = 0;
   int delayTMR = 20;
   int counter = 0;
   while(true){
         setDriveRegister(comMatrix, i, 200);
     i++;
-    counter++;
     if(i==6) i =0;
+    
+    // Start up delay 20 to 15
+    counter++;
     delay(delayTMR);
     if((counter == 100 && delayTMR > 15 && delayTMR != 20) || (counter == 1000 && delayTMR == 20)){
       counter = 0;
